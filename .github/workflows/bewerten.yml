@@ -51,10 +51,12 @@ jobs:
         run: python3 -m collector kataloge
 
       - name: Bewerten
+        id: bewerten
         env:
           ALLE: ${{ inputs.alle }}
         run: |
           # Montags alles neu, weil sich EPSS und KEV auch ohne neue SBOM ändern
+          set +e
           if [ "$ALLE" = "true" ] || [ "$(date -u +%u)" = "1" ]; then
             python3 -m collector bewerte --alle
           elif [ -s "$RUNNER_TEMP/geaendert.txt" ]; then
@@ -63,11 +65,15 @@ jobs:
           else
             echo "Keine neue oder geänderte SBOM"
           fi
+          code=$?
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          exit $code
 
-      # Auch wenn ein Repo nicht bewertet werden konnte (Exit 3), sollen die übrigen Berichte ins Repo;
-      # der Lauf bleibt trotzdem rot. Bei fehlgeschlagener Positivkontrolle (Exit 2) gibt es keine neuen Berichte.
+      # Committet wird nur nach einer Bewertung: bei Erfolg oder wenn einzelne Repos nicht bewertet
+      # werden konnten (Exit 3). Bei fehlgeschlagener Kontrolle oder Absturz bleiben auch die abgeholten
+      # SBOMs liegen, damit der nächste Lauf sie wieder als neu erkennt.
       - name: SBOMs und Berichte committen
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && (steps.bewerten.outcome == 'success' || steps.bewerten.outputs.code == '3') }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

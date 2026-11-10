@@ -61,7 +61,7 @@ def _grype_json(befehl: list[str]) -> dict:
 
 def befunde(ergebnis: dict, kataloge: Kataloge) -> list[Befund]:
     gefunden: dict[tuple[str, str, str], Befund] = {}
-    for treffer in ergebnis.get("matches", []):
+    for treffer in _liste(ergebnis, "matches"):
         befund = _befund(treffer, kataloge)
         gefunden.setdefault((befund.kennung, befund.paket, befund.version), befund)
     return list(gefunden.values())
@@ -76,11 +76,11 @@ def _befund(treffer: dict, kataloge: Kataloge) -> Befund:
     return Befund(
         kennung=kennung,
         alias=alias,
-        paket=artefakt["name"],
-        version=artefakt.get("version", ""),
-        typ=artefakt.get("type", ""),
-        fundort=", ".join(ort.get("path", "") for ort in artefakt.get("locations", [])),
-        behoben_in=", ".join(schwachstelle.get("fix", {}).get("versions", [])),
+        paket=artefakt.get("name") or "",
+        version=artefakt.get("version") or "",
+        typ=artefakt.get("type") or "",
+        fundort=", ".join(ort.get("path") or "" for ort in _liste(artefakt, "locations")),
+        behoben_in=", ".join(_liste(schwachstelle.get("fix") or {}, "versions")),
         cvss=cvss,
         cvss_version=cvss_version,
         epss=epss,
@@ -95,7 +95,7 @@ def cve_kennung(treffer: dict) -> tuple[str, str]:
     eigene = treffer["vulnerability"]["id"]
     if eigene.startswith("CVE-"):
         return eigene, ""
-    for verwandt in treffer.get("relatedVulnerabilities", []):
+    for verwandt in _liste(treffer, "relatedVulnerabilities"):
         if verwandt["id"].startswith("CVE-"):
             return verwandt["id"], eigene
     # Ohne CVE bleibt der Fund mit seiner GHSA- oder OSV-Kennung drin
@@ -103,19 +103,29 @@ def cve_kennung(treffer: dict) -> tuple[str, str]:
 
 
 def waehle_cvss(treffer: dict, kennung: str) -> tuple[float | None, str]:
-    eintraege = [eintrag for quelle in _cvss_quellen(treffer, kennung) for eintrag in quelle.get("cvss", [])]
+    eintraege = [
+        eintrag
+        for quelle in _cvss_quellen(treffer, kennung)
+        for eintrag in _liste(quelle, "cvss")
+        if (eintrag.get("metrics") or {}).get("baseScore") is not None
+    ]
     if not eintraege:
         return None, ""
     # Die eigene Bewertung der NVD geht vor der des Herstellers, dann zählt die Version
     bester = min(eintraege, key=lambda eintrag: (eintrag.get("source") != NVD_QUELLE, _versionsrang(eintrag)))
-    return bester["metrics"]["baseScore"], bester.get("version", "")
+    return bester["metrics"]["baseScore"], bester.get("version") or ""
 
 
 def _cvss_quellen(treffer: dict, kennung: str) -> list[dict]:
-    verwandte = [v for v in treffer.get("relatedVulnerabilities", []) if v["id"] == kennung]
+    verwandte = [v for v in _liste(treffer, "relatedVulnerabilities") if v.get("id") == kennung]
     return [treffer["vulnerability"], *verwandte]
 
 
 def _versionsrang(eintrag: dict) -> int:
     version = eintrag.get("version", "")
     return CVSS_REIHENFOLGE.index(version) if version in CVSS_REIHENFOLGE else len(CVSS_REIHENFOLGE)
+
+
+def _liste(eintrag: dict, schluessel: str) -> list:
+    # Grype schreibt leere Listen teils als null statt []
+    return eintrag.get(schluessel) or []

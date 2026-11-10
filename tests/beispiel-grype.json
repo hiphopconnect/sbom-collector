@@ -51,14 +51,14 @@
         "cvss": [{"source": "nvd@nist.gov", "type": "Primary", "version": "3.1", "metrics": {"baseScore": 9.8}}],
         "fix": {"versions": ["5.4"], "state": "fixed"}
       },
-      "artifact": {"name": "pyyaml", "version": "5.3", "type": "python",
-                   "locations": [{"path": "/requirements.txt"}]}
+      "relatedVulnerabilities": null,
+      "artifact": {"name": "pyyaml", "version": "5.3", "type": "python", "locations": null}
     },
     {
       "vulnerability": {
         "id": "GHSA-aaaa-bbbb-cccc",
-        "cvss": [],
-        "fix": {"versions": [], "state": "not-fixed"}
+        "cvss": null,
+        "fix": {"versions": null, "state": "not-fixed"}
       },
       "artifact": {"name": "beispielpaket", "version": "1.0", "type": "python",
                    "locations": [{"path": "/requirements.txt"}]}

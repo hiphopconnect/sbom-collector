@@ -42,7 +42,7 @@ def pruefe(pfad: Path, kataloge: Kataloge) -> Ergebnis:
     return Ergebnis(GEPRUEFT, komponenten, befunde)
 
 
-def pruefe_kontrolle(kataloge: Kataloge, pfad: Path = KONTROLLE) -> None:
+def pruefe_kontrolle(kataloge: Kataloge, pfad: Path = KONTROLLE) -> grype.Befund:
     ergebnis = pruefe(pfad, kataloge)
     if ergebnis.status != GEPRUEFT:
         raise KontrolleFehlgeschlagen(f"Kontroll-SBOM {ergebnis.status}: {ergebnis.fehler}")
@@ -62,3 +62,4 @@ def pruefe_kontrolle(kataloge: Kataloge, pfad: Path = KONTROLLE) -> None:
     ]
     if luecken:
         raise KontrolleFehlgeschlagen(f"{LOG4SHELL} ohne {', '.join(luecken)}, Katalog oder Auswertung defekt")
+    return log4shell

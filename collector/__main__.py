@@ -26,10 +26,14 @@ def bewerte(pfade: list[Path]) -> int:
     stand = datenstand(offen)
     # Ohne bestandene Kontrolle wäre "keine Befunde" nicht von einem kaputten Scan zu unterscheiden
     try:
-        pruefung.pruefe_kontrolle(offen)
+        beleg = pruefung.pruefe_kontrolle(offen)
     except pruefung.KontrolleFehlgeschlagen as fehler:
         print(f"Positivkontrolle fehlgeschlagen, keine Berichte geschrieben: {fehler}", file=sys.stderr)
         return FEHLER_KONTROLLE
+    print(
+        f"Positivkontrolle bestanden: {beleg.kennung} CVSS {beleg.cvss} (v{beleg.cvss_version}), "
+        f"EPSS {beleg.epss}, KEV {beleg.kev}, Fix {beleg.behoben_in or '-'}"
+    )
     nicht_geprueft = 0
     for pfad in pfade:
         herkunft = sbom.lies_herkunft(pfad, SBOM_ORDNER)
