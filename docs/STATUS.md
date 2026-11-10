@@ -5,30 +5,31 @@ Phase: MVP
 
 ## Aktueller Stand
 
-Prototyp lokal gebaut (ADR 0002): Das Test-Repo `sbom-testrepo` erzeugt bei jedem Push mit Syft `sbom.cdx.json` und committet sie ins eigene Repo, wenn sich die Abhängigkeiten geändert haben. Der Collector holt die SBOMs täglich ab (`quellen.txt`), bewertet sie mit Grype, EPSS und KEV nach dem Schema aus SecScan und schreibt Berichte je Repo und eine Übersicht. Positivkontrolle in jedem Lauf und Status je Repo (geprüft, SBOM leer, nicht bewertet), damit "keine Befunde" belegt ist. 23 Tests und ruff ohne Befund; Abruf gegen die echte GitHub-API und Laden von EPSS und KEV lokal geprüft. Noch nicht auf GitHub gelaufen, Grype noch nicht echt ausgeführt.
+Erster Durchgang auf GitHub am 2026-11-10 erfolgreich (ADR 0002): `sbom-testrepo` erzeugt bei jedem Push mit Syft `sbom.cdx.json` und committet sie nur bei geänderten Abhängigkeiten (leerer Commit erzeugt keinen SBOM-Commit). Der Collector holt sie ab, die Positivkontrolle besteht (Log4Shell mit CVSS 10, EPSS, KEV), das Test-Repo ergibt 6 Pakete, 2 CI-Actions und 127 Befunde: P1+ 1 (CVE-2023-4863, Pillow), P1 7, P2 88, P4 30, P? 1 (GHSA ohne CVE). Berichte unter `reports/`.
+
+Gegenproben: mit aktuellen Versionen "geprüft, 0 Befunde"; ohne Pakete ergab sich zunächst "geprüft" statt "SBOM leer", weil Dateieinträge und CI-Actions als Komponenten zählten. Korrigiert: gezählt werden nur Pakete der Anwendung, CI-Actions getrennt.
 
 ## In Arbeit
 
-- Erster Lauf auf GitHub: beide Repos anlegen und pushen, Workflow-Rechte auf "Read and write" stellen.
+- Gegenprobe ohne Pakete nach der Korrektur wiederholen, danach `requirements.txt` im Test-Repo wieder auf die verwundbaren Versionen setzen.
 
 ## Nächste Schritte
 
-1. Repos `sbom-collector` und `sbom-testrepo` auf GitHub anlegen und pushen, dann der Ablauf: Collector von Hand starten (Kontrolle muss bestehen), Test-Repo pushen, Gegenproben ohne Funde und mit leerer `requirements.txt`.
-2. Echte Grype-Ausgabe gegen die Annahmen in `tests/beispiel-grype.json` prüfen, vor allem `cvss[].source` und `grype db status -o json`.
-3. Prüfen, ob `.syft.yaml` von `anchore/sbom-action` gelesen wird (sonst erzeugt jeder Push einen SBOM-Commit).
-4. Beispiel-ZIP `sbom-pipeline-example` aus dem claude.ai-Konto abgleichen.
-5. Für die Firma: GitHub App mit Lesezugriff statt Token; Hülle für Jenkins.
+1. Gegenprobe ohne Pakete wiederholen (erwartet "SBOM leer"), Test-Repo zurücksetzen.
+2. Beispiel-ZIP `sbom-pipeline-example` aus dem claude.ai-Konto abgleichen.
+3. Für die Firma: GitHub App mit Lesezugriff statt Token; Hülle für Jenkins.
 
 ## Offene Fragen / Blocker
 
 - Läuft es in der Firma auf GitHub Enterprise oder Jenkins, und gibt es dort eine GitHub App?
+- GitHub-Konto war am 2026-11-10 zeitweise für Actions gesperrt ("account is locked due to a billing issue"); Ursache unklar, nach Änderung am Actions-Budget lief es wieder.
 
 ## Bekannte Probleme
 
-- Die Testdaten für Grype sind nach dem dokumentierten Ausgabeformat geschrieben, nicht aus einem echten Lauf.
+- Grype schreibt leere Felder teils als null; die Auswertung fängt das ab, die Testdaten bilden es nach.
 - Die Grype-Datenbank wird bei jedem Lauf neu geladen, kein Cache.
 - Löscht ein Quell-Repo seine SBOM, bleibt die letzte im Collector liegen.
 
 ## Letzte Sessions
 
-- 2026-11-10: Vision, Prototyp mit Push (ADR 0001), umgebaut auf Ablage im Quell-Repo und Abholen (ADR 0002)
+- 2026-11-10: Vision, Prototyp mit Push (ADR 0001), umgebaut auf Ablage im Quell-Repo und Abholen (ADR 0002), erster Durchgang auf GitHub erfolgreich

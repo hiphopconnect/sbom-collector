@@ -39,12 +39,12 @@ Die Schwellen sind die Standardwerte von CVE Prioritizer. FIRST, der Herausgeber
 Ein leerer Bericht darf nicht bedeuten, dass der Scan gar nicht lief. Drei Sicherungen:
 
 1. **Positivkontrolle in jedem Lauf.** `kontrolle/kontrolle.cdx.json` enthält `log4j-core 2.14.1` und `requests 2.19.1`. Grype muss dort CVE-2021-44228 und CVE-2018-18074 finden, Log4Shell zusätzlich mit KEV, EPSS und CVSS. Sonst bricht der Lauf mit Exit 2 ab und schreibt keine Berichte. Damit fallen ein kaputtes Grype, eine leere Datenbank, fehlende Kataloge und Fehler in der Auswertung auf.
-2. **Status je Repo.** Jeder Bericht nennt die Zahl der Komponenten in der SBOM und einen Status:
+2. **Status je Repo.** Jeder Bericht nennt die Zahl der Pakete und der CI-Actions in der SBOM und einen Status. Dateieinträge, die Syft ebenfalls als Komponenten führt, zählen nicht; GitHub Actions aus den Workflows (`pkg:github/...`) werden gescannt, zählen aber nicht als Pakete der Anwendung:
 
 | Status | Bedeutung |
 |---|---|
-| geprüft | SBOM mit Komponenten, Scan gelaufen, Kontrolle bestanden; mit oder ohne Befunde |
-| SBOM leer | Syft hat keine Pakete gefunden: Repo ohne Abhängigkeiten oder SBOM-Erzeugung falsch eingerichtet, also kein sauberes Ergebnis |
+| geprüft | SBOM mit mindestens einem Paket, Scan gelaufen, Kontrolle bestanden; mit oder ohne Befunde |
+| SBOM leer | Syft hat keine Pakete gefunden, höchstens CI-Actions: Repo ohne Abhängigkeiten oder SBOM-Erzeugung falsch eingerichtet, also kein sauberes Ergebnis |
 | nicht bewertet | Grype ist an dieser SBOM gescheitert, mit Fehlermeldung im Bericht; der Lauf endet mit Exit 3 |
 
 3. **Übersicht.** "nicht bewertet" und "SBOM leer" stehen vor allen Befunden. Die Spalte "Abhängigkeiten geändert" zeigt, wie alt eine SBOM ist; ein Repo, dessen Workflow nicht mehr läuft, fällt dort auf.

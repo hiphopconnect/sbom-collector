@@ -10,7 +10,7 @@ from pathlib import Path
 from collector.grype import Befund
 from collector.prioritaet import BEDEUTUNG, CVSS_SCHWELLE, EPSS_SCHWELLE, FRIST, REIHENFOLGE, rang
 from collector.pruefung import FEHLGESCHLAGEN, GEPRUEFT, SBOM_LEER, Ergebnis
-from collector.sbom import Herkunft
+from collector.sbom import Herkunft, Inhalt
 
 UEBERSICHT = "SUMMARY.md"
 LEER = "-"
@@ -39,7 +39,8 @@ def schreibe_repo(herkunft: Herkunft, ergebnis: Ergebnis, stand: dict, ziel: Pat
     inhalt = {
         "herkunft": asdict(herkunft),
         "status": ergebnis.status,
-        "komponenten": ergebnis.komponenten,
+        "pakete": ergebnis.inhalt.pakete,
+        "ci_actions": ergebnis.inhalt.ci_actions,
         "fehler": ergebnis.fehler,
         "stand": stand,
         "anzahl": zaehle(ergebnis.befunde),
@@ -58,7 +59,7 @@ def repo_markdown(herkunft: Herkunft, ergebnis: Ergebnis, stand: dict) -> str:
         "",
         f"- Commit: `{herkunft.commit[:12] or LEER}` auf `{herkunft.ref or LEER}`, {herkunft.zeit or LEER}",
         f"- Autor: {herkunft.autor or LEER} {_mail(herkunft.autor_mail)}".rstrip(),
-        f"- Status: {ergebnis.status}, {ergebnis.komponenten} Komponenten in der SBOM",
+        f"- Status: {ergebnis.status}, {_inhalt(ergebnis.inhalt)} in der SBOM",
         "",
         *_ergebnisteil(ergebnis),
         "",
@@ -73,7 +74,7 @@ def _ergebnisteil(ergebnis: Ergebnis) -> list[str]:
         return [STATUSTEXT[ergebnis.status] + ".", *fehler]
     if not ergebnis.befunde:
         return [
-            f"Keine Befunde. Geprüft wurden {ergebnis.komponenten} Komponenten; die Positivkontrolle "
+            f"Keine Befunde. Geprüft wurden {_inhalt(ergebnis.inhalt)}; die Positivkontrolle "
             "dieses Laufs hat die erwarteten CVEs gefunden, der Scan hat also funktioniert."
         ]
     anzahl = zaehle(ergebnis.befunde)
@@ -84,6 +85,10 @@ def _ergebnisteil(ergebnis: Ergebnis) -> list[str]:
         "|---|---|---|---|---|---|---|---|---|",
         *(_befundzeile(b) for b in ergebnis.befunde),
     ]
+
+
+def _inhalt(inhalt: Inhalt) -> str:
+    return f"{inhalt.pakete} Pakete und {inhalt.ci_actions} CI-Actions"
 
 
 def _befundzeile(b: Befund) -> str:

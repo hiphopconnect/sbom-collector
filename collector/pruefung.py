@@ -25,21 +25,21 @@ class KontrolleFehlgeschlagen(RuntimeError):
 @dataclass
 class Ergebnis:
     status: str
-    komponenten: int
+    inhalt: sbom.Inhalt
     befunde: list[grype.Befund] = field(default_factory=list)
     fehler: str = ""
 
 
 def pruefe(pfad: Path, kataloge: Kataloge) -> Ergebnis:
-    komponenten = sbom.komponenten(pfad)
-    # Ohne Komponenten hat Syft nichts gefunden; das ist kein sauberes Ergebnis
-    if komponenten == 0:
-        return Ergebnis(SBOM_LEER, 0)
+    inhalt = sbom.zaehle(pfad)
+    # Ohne Pakete hat Syft nichts gefunden; das ist kein sauberes Ergebnis, auch wenn CI-Actions drin sind
+    if inhalt.pakete == 0:
+        return Ergebnis(SBOM_LEER, inhalt)
     try:
         befunde = grype.befunde(grype.scanne(pfad), kataloge)
     except (RuntimeError, ValueError) as fehler:
-        return Ergebnis(FEHLGESCHLAGEN, komponenten, fehler=str(fehler))
-    return Ergebnis(GEPRUEFT, komponenten, befunde)
+        return Ergebnis(FEHLGESCHLAGEN, inhalt, fehler=str(fehler))
+    return Ergebnis(GEPRUEFT, inhalt, befunde)
 
 
 def pruefe_kontrolle(kataloge: Kataloge, pfad: Path = KONTROLLE) -> grype.Befund:

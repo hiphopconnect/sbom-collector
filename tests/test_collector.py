@@ -114,7 +114,7 @@ class BerichtTest(unittest.TestCase):
             herkunft = sbom.lies_herkunft(sbom_pfad, wurzel / "sboms")
             befunde = grype.befunde(lade_beispiel(), beispielkataloge())
             ziel = wurzel / "reports" / herkunft.repo
-            ergebnis = pruefung.Ergebnis(pruefung.GEPRUEFT, 6, befunde)
+            ergebnis = pruefung.Ergebnis(pruefung.GEPRUEFT, sbom.Inhalt(6, 2), befunde)
             bericht.schreibe_repo(herkunft, ergebnis, {"EPSS": "2026-11-10"}, ziel)
             bericht.schreibe_uebersicht(wurzel / "reports")
             text = (wurzel / "reports" / "beispiel" / "app.md").read_text(encoding="utf-8")
@@ -141,7 +141,20 @@ class PruefungTest(unittest.TestCase):
     def test_verschachtelte_komponenten_zaehlen(self):
         with tempfile.TemporaryDirectory() as ordner:
             pfad = schreibe_sbom(Path(ordner), [{"name": "a", "components": [{"name": "b"}]}])
-            self.assertEqual(sbom.komponenten(pfad), 2)
+            self.assertEqual(sbom.zaehle(pfad), sbom.Inhalt(2, 0))
+
+    def test_nur_actions_und_dateien_ist_leer(self):
+        # So sah die Gegenprobe ohne Pakete aus: zwei Actions und die Workflow-Datei
+        komponenten = [
+            {"type": "library", "name": "actions/checkout", "purl": "pkg:github/actions/checkout@v7.0.1"},
+            {"type": "library", "name": "anchore/sbom-action", "purl": "pkg:github/anchore/sbom-action@v0.24.3"},
+            {"type": "file", "name": "/home/runner/work/x/x/.github/workflows/sbom.yml"},
+        ]
+        with tempfile.TemporaryDirectory() as ordner:
+            pfad = schreibe_sbom(Path(ordner), komponenten)
+            self.assertEqual(sbom.zaehle(pfad), sbom.Inhalt(0, 2))
+            ergebnis = pruefung.pruefe(pfad, beispielkataloge())
+        self.assertEqual(ergebnis.status, pruefung.SBOM_LEER)
 
     def test_scan_fehler_wird_sichtbar(self):
         with tempfile.TemporaryDirectory() as ordner:
@@ -152,8 +165,8 @@ class PruefungTest(unittest.TestCase):
 
     def test_keine_befunde_mit_beleg(self):
         herkunft = sbom.Herkunft("a/b", "", "", "", "", "")
-        text = bericht.repo_markdown(herkunft, pruefung.Ergebnis(pruefung.GEPRUEFT, 7), {})
-        self.assertIn("Geprüft wurden 7 Komponenten", text)
+        text = bericht.repo_markdown(herkunft, pruefung.Ergebnis(pruefung.GEPRUEFT, sbom.Inhalt(7, 2)), {})
+        self.assertIn("Geprüft wurden 7 Pakete und 2 CI-Actions", text)
 
 
 class KontrolleTest(unittest.TestCase):

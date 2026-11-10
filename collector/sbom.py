@@ -8,6 +8,10 @@ from pathlib import Path
 
 PRAEFIX = "sbom-collector:"
 ENDUNG = ".cdx.json"
+# Syft führt gefundene Dateien als Komponenten; sie sind keine Pakete
+DATEI = "file"
+# Actions aus den Workflows des Repos: werden gescannt, zählen aber nicht als Pakete der Anwendung
+CI_ACTION = "pkg:github/"
 
 
 @dataclass
@@ -46,12 +50,23 @@ def alle_sboms(sbom_ordner: Path) -> list[Path]:
     return sorted(sbom_ordner.rglob(f"*{ENDUNG}"))
 
 
-def komponenten(pfad: Path) -> int:
-    """Zahl der Komponenten, auch verschachtelte; 0 heißt, Syft hat nichts gefunden."""
-    offen = list(json.loads(pfad.read_text(encoding="utf-8")).get("components", []))
-    anzahl = 0
+@dataclass
+class Inhalt:
+    pakete: int
+    ci_actions: int
+
+
+def zaehle(pfad: Path) -> Inhalt:
+    """Pakete der Anwendung und CI-Actions; Dateieinträge von Syft zählen nicht."""
+    offen = list(json.loads(pfad.read_text(encoding="utf-8")).get("components") or [])
+    pakete = ci_actions = 0
     while offen:
         komponente = offen.pop()
-        anzahl += 1
-        offen.extend(komponente.get("components", []))
-    return anzahl
+        offen.extend(komponente.get("components") or [])
+        if komponente.get("type") == DATEI:
+            continue
+        if (komponente.get("purl") or "").startswith(CI_ACTION):
+            ci_actions += 1
+        else:
+            pakete += 1
+    return Inhalt(pakete, ci_actions)

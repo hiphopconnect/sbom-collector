@@ -39,8 +39,10 @@ def bewerte(pfade: list[Path]) -> int:
         herkunft = sbom.lies_herkunft(pfad, SBOM_ORDNER)
         ergebnis = pruefung.pruefe(pfad, offen)
         bericht.schreibe_repo(herkunft, ergebnis, stand, BERICHT_ORDNER / herkunft.repo)
+        inhalt = ergebnis.inhalt
         print(
-            f"{herkunft.repo}: {ergebnis.status}, {ergebnis.komponenten} Komponenten, {len(ergebnis.befunde)} Befunde"
+            f"{herkunft.repo}: {ergebnis.status}, {inhalt.pakete} Pakete, "
+            f"{inhalt.ci_actions} CI-Actions, {len(ergebnis.befunde)} Befunde"
         )
         nicht_geprueft += ergebnis.status != pruefung.GEPRUEFT
     bericht.schreibe_uebersicht(BERICHT_ORDNER)
