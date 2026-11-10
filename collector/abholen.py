@@ -10,7 +10,8 @@ from pathlib import Path
 
 from collector.sbom import ENDUNG
 
-API = "https://api.github.com"
+# Auf GitHub Enterprise Server setzt Actions GITHUB_API_URL auf die eigene Instanz
+STANDARD_API = "https://api.github.com"
 QUELL_DATEI = "sbom.cdx.json"
 ZEITLIMIT_S = 60
 SEITENGROESSE = 100
@@ -21,13 +22,14 @@ NICHT_GEFUNDEN = 404
 class GitHub:
     """Lesender Zugriff auf die REST-API; ohne Token nur öffentliche Repos."""
 
-    def __init__(self, token: str = "") -> None:
+    def __init__(self, token: str = "", api: str = STANDARD_API) -> None:
+        self.api = api.rstrip("/")
         self.kopf = {"Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"}
         if token:
             self.kopf["Authorization"] = f"Bearer {token}"
 
     def liste(self, pfad: str) -> list[dict]:
-        eintraege, url = [], f"{API}{pfad}?per_page={SEITENGROESSE}"
+        eintraege, url = [], f"{self.api}{pfad}?per_page={SEITENGROESSE}"
         while url:
             inhalt, link = self._hole(url, self.kopf)
             eintraege.extend(json.loads(inhalt))
@@ -38,7 +40,7 @@ class GitHub:
     def datei(self, repo: str, pfad: str) -> bytes | None:
         kopf = {**self.kopf, "Accept": "application/vnd.github.raw"}
         try:
-            inhalt, _ = self._hole(f"{API}/repos/{repo}/contents/{pfad}", kopf)
+            inhalt, _ = self._hole(f"{self.api}/repos/{repo}/contents/{pfad}", kopf)
         except urllib.error.HTTPError as fehler:
             if fehler.code == NICHT_GEFUNDEN:
                 return None

@@ -2,7 +2,7 @@
 
 Sammelt die SBOMs vieler Repos an einer Stelle und priorisiert die CVEs darin nach KEV, EPSS und CVSS. Für jedes Repo entsteht ein Bericht mit dem Commit und dem Autor, der die Abhängigkeiten zuletzt geändert hat, damit klar ist, wen man anschreibt. Dazu eine Übersicht über alle Repos nach Dringlichkeit.
 
-Stand: Prototyp. Hintergrund in [docs/VISION.md](docs/VISION.md), Entscheidungen in [docs/adr/](docs/adr/).
+Stand: Prototyp. Hintergrund in [docs/VISION.md](docs/VISION.md), Entscheidungen in [docs/adr/](docs/adr/), Übertragen auf ein anderes GitHub und andere Repos in [docs/uebertragen.md](docs/uebertragen.md).
 
 ## Ablauf
 
@@ -73,7 +73,7 @@ Alles wird als Datei geladen, nicht je CVE über eine API abgefragt.
 
 ### Quell-Repo
 
-1. `.github/workflows/sbom.yml` und `.syft.yaml` aus [sbom-testrepo](https://github.com/hiphopconnect/sbom-testrepo) übernehmen.
+1. `.github/workflows/sbom.yml` und `.syft.yaml` aus dem Test-Repo `sbom-testrepo` übernehmen.
 2. Settings > Actions > General > Workflow permissions: "Read and write permissions".
 3. Pushen. Nach dem Lauf liegt `sbom.cdx.json` im Repo.
 

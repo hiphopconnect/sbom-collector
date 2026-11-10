@@ -51,7 +51,11 @@ def bewerte(pfade: list[Path]) -> int:
 
 def hole(liste: Path | None) -> None:
     token = next((os.environ[name] for name in TOKEN_VARIABLEN if os.environ.get(name)), "")
-    geaendert = abholen.abholen(abholen.lies_quellen(QUELLEN), SBOM_ORDNER, abholen.GitHub(token))
+    geaendert = abholen.abholen(
+        abholen.lies_quellen(QUELLEN),
+        SBOM_ORDNER,
+        abholen.GitHub(token, os.environ.get("GITHUB_API_URL") or abholen.STANDARD_API),
+    )
     for pfad in geaendert:
         print(f"neu oder geändert: {pfad}")
     if liste:
