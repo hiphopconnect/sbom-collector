@@ -1,20 +1,20 @@
 {
   "herkunft": {
     "repo": "hiphopconnect/sbom-testrepo",
-    "commit": "f00b851765c57f75a6c212151238a0a42e957efa",
+    "commit": "effa85b26daf23c8e363a983084abe39124430aa",
     "ref": "main",
     "autor": "Michael Milke",
     "autor_mail": "michael.milke@posteo.de",
-    "zeit": "2026-11-10T20:59:56+01:00"
+    "zeit": "2026-11-10T21:03:36+01:00"
   },
   "status": "geprüft",
-  "komponenten": 10,
+  "komponenten": 3,
   "fehler": "",
   "stand": {
     "Grype": "0.121.0",
     "Grype-Datenbank": "2026-11-10T06:21:20Z",
     "EPSS": "2026-11-10T12:00:24Z",
-    "KEV": "2026-11-10T19:03:29.8375Z"
+    "KEV": "2026-11-09T19:54:37.4945Z"
   },
   "anzahl": {
     "P1+": 0,
