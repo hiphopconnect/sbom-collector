@@ -2,9 +2,9 @@
 
 - Commit: `effa85b26daf` auf `main`, 2026-11-10T21:03:36+01:00
 - Autor: Michael Milke <michael.milke@posteo.de>
-- Status: geprüft, 3 Komponenten in der SBOM
+- Status: SBOM leer, 0 Pakete und 2 CI-Actions in der SBOM
 
-Keine Befunde. Geprüft wurden 3 Komponenten; die Positivkontrolle dieses Laufs hat die erwarteten CVEs gefunden, der Scan hat also funktioniert.
+**SBOM leer**: Syft hat keine Pakete gefunden. Das ist kein sauberes Ergebnis, sondern heißt meist, dass die SBOM-Erzeugung im Repo falsch eingerichtet ist.
 
 ## Einordnung
 
@@ -22,4 +22,4 @@ KEV geht vor, danach entscheiden EPSS ab 0.2 und CVSS ab 6.0 über das Feld (Sch
 - Grype: 0.121.0
 - Grype-Datenbank: 2026-11-10T06:21:20Z
 - EPSS: 2026-11-10T12:00:24Z
-- KEV: 2026-11-09T19:54:37.4945Z
+- KEV: 2026-11-10T19:03:29.8375Z
