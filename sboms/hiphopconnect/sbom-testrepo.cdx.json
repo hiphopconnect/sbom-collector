@@ -26,7 +26,7 @@
       },
       {
         "name": "sbom-collector:commit",
-        "value": "cae45b0ae19a4b9858ae38503737398bf3de0ed2"
+        "value": "f00b851765c57f75a6c212151238a0a42e957efa"
       },
       {
         "name": "sbom-collector:ref",
@@ -42,7 +42,7 @@
       },
       {
         "name": "sbom-collector:zeit",
-        "value": "2026-11-10T19:58:52+01:00"
+        "value": "2026-11-10T20:59:56+01:00"
       }
     ]
   },
@@ -120,12 +120,12 @@
       ]
     },
     {
-      "bom-ref": "pkg:pypi/django@3.2.4?package-id=f4c7cf7907bb442a",
+      "bom-ref": "pkg:pypi/django@6.1.3?package-id=bb31e38ba7e5a3ed",
       "type": "library",
       "name": "django",
-      "version": "3.2.4",
-      "cpe": "cpe:2.3:a:python-django:python-django:3.2.4:*:*:*:*:*:*:*",
-      "purl": "pkg:pypi/django@3.2.4",
+      "version": "6.1.3",
+      "cpe": "cpe:2.3:a:python-django:python-django:6.1.3:*:*:*:*:*:*:*",
+      "purl": "pkg:pypi/django@6.1.3",
       "properties": [
         {
           "name": "syft:package:foundBy",
@@ -145,47 +145,47 @@
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python-django:python_django:3.2.4:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python-django:python_django:6.1.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python_django:python-django:3.2.4:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python_django:python-django:6.1.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python_django:python_django:3.2.4:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python_django:python_django:6.1.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:django:python-django:3.2.4:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:django:python-django:6.1.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:django:python_django:3.2.4:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:django:python_django:6.1.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python-django:django:3.2.4:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python-django:django:6.1.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python:python-django:3.2.4:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python:python-django:6.1.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python:python_django:3.2.4:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python:python_django:6.1.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python_django:django:3.2.4:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python_django:django:6.1.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:django:django:3.2.4:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:django:django:6.1.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python:django:3.2.4:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python:django:6.1.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:location:0:path",
@@ -194,12 +194,12 @@
       ]
     },
     {
-      "bom-ref": "pkg:pypi/jinja2@2.10?package-id=d51e03b7f2a59975",
+      "bom-ref": "pkg:pypi/jinja2@3.1.6?package-id=d6483f383ac2033c",
       "type": "library",
       "name": "jinja2",
-      "version": "2.10",
-      "cpe": "cpe:2.3:a:python-jinja2:python-jinja2:2.10:*:*:*:*:*:*:*",
-      "purl": "pkg:pypi/jinja2@2.10",
+      "version": "3.1.6",
+      "cpe": "cpe:2.3:a:python-jinja2:python-jinja2:3.1.6:*:*:*:*:*:*:*",
+      "purl": "pkg:pypi/jinja2@3.1.6",
       "properties": [
         {
           "name": "syft:package:foundBy",
@@ -219,47 +219,47 @@
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python-jinja2:python_jinja2:2.10:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python-jinja2:python_jinja2:3.1.6:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python_jinja2:python-jinja2:2.10:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python_jinja2:python-jinja2:3.1.6:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python_jinja2:python_jinja2:2.10:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python_jinja2:python_jinja2:3.1.6:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:jinja2:python-jinja2:2.10:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:jinja2:python-jinja2:3.1.6:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:jinja2:python_jinja2:2.10:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:jinja2:python_jinja2:3.1.6:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python-jinja2:jinja2:2.10:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python-jinja2:jinja2:3.1.6:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python:python-jinja2:2.10:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python:python-jinja2:3.1.6:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python:python_jinja2:2.10:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python:python_jinja2:3.1.6:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python_jinja2:jinja2:2.10:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python_jinja2:jinja2:3.1.6:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:jinja2:jinja2:2.10:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:jinja2:jinja2:3.1.6:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python:jinja2:2.10:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python:jinja2:3.1.6:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:location:0:path",
@@ -268,12 +268,12 @@
       ]
     },
     {
-      "bom-ref": "pkg:pypi/pillow@8.1.0?package-id=bdcdf569a74546ad",
+      "bom-ref": "pkg:pypi/pillow@13.0.0?package-id=5fed7a1647bb56ea",
       "type": "library",
       "name": "pillow",
-      "version": "8.1.0",
-      "cpe": "cpe:2.3:a:python-pillow:python-pillow:8.1.0:*:*:*:*:*:*:*",
-      "purl": "pkg:pypi/pillow@8.1.0",
+      "version": "13.0.0",
+      "cpe": "cpe:2.3:a:python-pillow:python-pillow:13.0.0:*:*:*:*:*:*:*",
+      "purl": "pkg:pypi/pillow@13.0.0",
       "properties": [
         {
           "name": "syft:package:foundBy",
@@ -293,47 +293,47 @@
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python-pillow:python_pillow:8.1.0:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python-pillow:python_pillow:13.0.0:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python_pillow:python-pillow:8.1.0:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python_pillow:python-pillow:13.0.0:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python_pillow:python_pillow:8.1.0:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python_pillow:python_pillow:13.0.0:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:pillow:python-pillow:8.1.0:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:pillow:python-pillow:13.0.0:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:pillow:python_pillow:8.1.0:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:pillow:python_pillow:13.0.0:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python-pillow:pillow:8.1.0:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python-pillow:pillow:13.0.0:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python:python-pillow:8.1.0:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python:python-pillow:13.0.0:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python:python_pillow:8.1.0:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python:python_pillow:13.0.0:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python_pillow:pillow:8.1.0:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python_pillow:pillow:13.0.0:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:pillow:pillow:8.1.0:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:pillow:pillow:13.0.0:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python:pillow:8.1.0:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python:pillow:13.0.0:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:location:0:path",
@@ -342,12 +342,12 @@
       ]
     },
     {
-      "bom-ref": "pkg:pypi/pyyaml@5.3?package-id=5f2f2c0069ad6ce5",
+      "bom-ref": "pkg:pypi/pyyaml@6.0.3?package-id=a4495a144d0c48e2",
       "type": "library",
       "name": "pyyaml",
-      "version": "5.3",
-      "cpe": "cpe:2.3:a:python-pyyaml:python-pyyaml:5.3:*:*:*:*:*:*:*",
-      "purl": "pkg:pypi/pyyaml@5.3",
+      "version": "6.0.3",
+      "cpe": "cpe:2.3:a:python-pyyaml:python-pyyaml:6.0.3:*:*:*:*:*:*:*",
+      "purl": "pkg:pypi/pyyaml@6.0.3",
       "properties": [
         {
           "name": "syft:package:foundBy",
@@ -367,47 +367,47 @@
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python-pyyaml:python_pyyaml:5.3:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python-pyyaml:python_pyyaml:6.0.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python_pyyaml:python-pyyaml:5.3:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python_pyyaml:python-pyyaml:6.0.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python_pyyaml:python_pyyaml:5.3:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python_pyyaml:python_pyyaml:6.0.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python-pyyaml:pyyaml:5.3:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python-pyyaml:pyyaml:6.0.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python:python-pyyaml:5.3:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python:python-pyyaml:6.0.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python:python_pyyaml:5.3:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python:python_pyyaml:6.0.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python_pyyaml:pyyaml:5.3:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python_pyyaml:pyyaml:6.0.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:pyyaml:python-pyyaml:5.3:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:pyyaml:python-pyyaml:6.0.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:pyyaml:python_pyyaml:5.3:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:pyyaml:python_pyyaml:6.0.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:python:pyyaml:5.3:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:python:pyyaml:6.0.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:cpe23",
-          "value": "cpe:2.3:a:pyyaml:pyyaml:5.3:*:*:*:*:*:*:*"
+          "value": "cpe:2.3:a:pyyaml:pyyaml:6.0.3:*:*:*:*:*:*:*"
         },
         {
           "name": "syft:location:0:path",
@@ -416,12 +416,12 @@
       ]
     },
     {
-      "bom-ref": "pkg:pypi/requests@2.19.1?package-id=928fc3c958241ddd",
+      "bom-ref": "pkg:pypi/requests@2.34.2?package-id=ff223baec0f12bdf",
       "type": "library",
       "name": "requests",
-      "version": "2.19.1",
-      "cpe": "cpe:2.3:a:python:requests:2.19.1:*:*:*:*:*:*:*",
-      "purl": "pkg:pypi/requests@2.19.1",
+      "version": "2.34.2",
+      "cpe": "cpe:2.3:a:python:requests:2.34.2:*:*:*:*:*:*:*",
+      "purl": "pkg:pypi/requests@2.34.2",
       "properties": [
         {
           "name": "syft:package:foundBy",
@@ -446,12 +446,12 @@
       ]
     },
     {
-      "bom-ref": "pkg:pypi/urllib3@1.24.1?package-id=c6b61662f2e91e7e",
+      "bom-ref": "pkg:pypi/urllib3@2.8.0?package-id=9caae9c05ebbe6d1",
       "type": "library",
       "name": "urllib3",
-      "version": "1.24.1",
-      "cpe": "cpe:2.3:a:python:urllib3:1.24.1:*:*:*:*:*:*:*",
-      "purl": "pkg:pypi/urllib3@1.24.1",
+      "version": "2.8.0",
+      "cpe": "cpe:2.3:a:python:urllib3:2.8.0:*:*:*:*:*:*:*",
+      "purl": "pkg:pypi/urllib3@2.8.0",
       "properties": [
         {
           "name": "syft:package:foundBy",
@@ -497,11 +497,11 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "36da526ef45d40d431ab0bae21b1b2948b913dd4"
+          "content": "5d549e6fc635ecdc5e493a701d21c630393ca654"
         },
         {
           "alg": "SHA-256",
-          "content": "5b7d5194482308fe17590519c8d506a277062c253c75a5d8e26591b1bfc7401f"
+          "content": "4795f17d4c362ea4c256eb229e96cb977e5b70dc3a5ba900d6c6e49e3fa12b64"
         }
       ]
     }
