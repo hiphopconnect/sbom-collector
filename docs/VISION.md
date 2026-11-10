@@ -25,7 +25,8 @@ Nachvollziehbar statt raffiniert: jede Priorität folgt aus drei öffentlichen W
 
 ## Nicht-Ziele
 
-- Keine Geräte, Container-Images oder Binärdateien im ersten Schritt, nur Paketabhängigkeiten aus den Repos.
-- Kein Coverage-Audit, keine Canaries, kein Dependency-Track (eigenes Vorhaben, Stand 2026-11-09).
-- Keine Schutzbedarfs- oder Befundklassen; die bleiben im Freigabeprozess.
+- Keine Geräte, Container-Images oder Binärdateien im ersten Schritt, nur Paketabhängigkeiten aus den Repos (Ausbau in Idee 0004).
+- Kein Abgleich, ob eine SBOM alle Bestandteile eines Repos erfasst; der Collector bewertet, was Syft findet.
+- Keine Verwaltung von Ausnahmen oder Risikoakzeptanzen je Befund.
+- Keine Einstufung nach dem Einsatzort einer Software; die Priorität folgt nur aus KEV, EPSS und CVSS.
 - Kein automatischer Mailversand an Autoren im Prototyp.

@@ -16,8 +16,9 @@ Gegenproben: mit aktuellen Versionen "geprüft, 0 Befunde"; ohne Pakete ergab si
 ## Nächste Schritte
 
 1. Vorführung im Browser durchspielen (README von sbom-testrepo).
-2. Mit meinem früheren Entwurf `sbom-pipeline-example` abgleichen.
-3. Für die Firma: GitHub App mit Lesezugriff statt Token; Hülle für Jenkins.
+2. Für die Firma: GitHub App mit Lesezugriff (Idee 0002), wiederverwendbarer Workflow (Idee 0003), Skalierung auf viele Repos (Idee 0001), Hülle für Jenkins.
+3. Container-Images bewerten (Idee 0004).
+4. Geschützten Standardbranch unterstützen (Idee 0005).
 
 ## Offene Fragen / Blocker
 

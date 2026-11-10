@@ -22,7 +22,7 @@ Die Quell-Repos brauchen kein Secret und keinen Zugriff auf den Collector. Monta
 
 ## Priorität
 
-Übernommen aus SecScan, Schema und Schwellen nach dem Projekt [CVE Prioritizer](https://github.com/TURROKS/CVE_Prioritizer):
+Übernommen aus SecScan, dem Prüfwerkzeug aus meiner Bachelorarbeit; Schema und Schwellen nach dem Projekt [CVE Prioritizer](https://github.com/TURROKS/CVE_Prioritizer):
 
 | | CVSS ab 6,0 | CVSS unter 6,0 |
 |---|---|---|
