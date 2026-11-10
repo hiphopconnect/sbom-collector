@@ -1,0 +1,67 @@
+{
+  "matches": [
+    {
+      "vulnerability": {
+        "id": "GHSA-x84v-xcm2-53pg",
+        "namespace": "github:language:python",
+        "severity": "High",
+        "cvss": [
+          {"source": "security-advisories@github.com", "type": "Secondary", "version": "3.1",
+           "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:N", "metrics": {"baseScore": 6.1}}
+        ],
+        "fix": {"versions": ["2.20.0"], "state": "fixed"}
+      },
+      "relatedVulnerabilities": [
+        {
+          "id": "CVE-2018-18074",
+          "namespace": "nvd:cpe",
+          "cvss": [
+            {"source": "nvd@nist.gov", "type": "Primary", "version": "2.0",
+             "vector": "AV:N/AC:L/Au:N/C:P/I:N/A:N", "metrics": {"baseScore": 5.0}},
+            {"source": "nvd@nist.gov", "type": "Primary", "version": "3.1",
+             "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H", "metrics": {"baseScore": 9.8}}
+          ]
+        }
+      ],
+      "artifact": {"name": "requests", "version": "2.19.1", "type": "python",
+                   "locations": [{"path": "/requirements.txt"}], "purl": "pkg:pypi/requests@2.19.1"}
+    },
+    {
+      "vulnerability": {
+        "id": "CVE-2018-18074",
+        "namespace": "nvd:cpe",
+        "cvss": [{"source": "nvd@nist.gov", "type": "Primary", "version": "3.1", "metrics": {"baseScore": 9.8}}],
+        "fix": {"versions": ["2.20.0"], "state": "fixed"}
+      },
+      "artifact": {"name": "requests", "version": "2.19.1", "type": "python",
+                   "locations": [{"path": "/requirements.txt"}]}
+    },
+    {
+      "vulnerability": {
+        "id": "CVE-2019-10906",
+        "cvss": [{"source": "nvd@nist.gov", "type": "Primary", "version": "3.1", "metrics": {"baseScore": 8.6}}],
+        "fix": {"versions": ["2.10.1"], "state": "fixed"}
+      },
+      "artifact": {"name": "jinja2", "version": "2.10", "type": "python",
+                   "locations": [{"path": "/requirements.txt"}]}
+    },
+    {
+      "vulnerability": {
+        "id": "CVE-2020-14343",
+        "cvss": [{"source": "nvd@nist.gov", "type": "Primary", "version": "3.1", "metrics": {"baseScore": 9.8}}],
+        "fix": {"versions": ["5.4"], "state": "fixed"}
+      },
+      "artifact": {"name": "pyyaml", "version": "5.3", "type": "python",
+                   "locations": [{"path": "/requirements.txt"}]}
+    },
+    {
+      "vulnerability": {
+        "id": "GHSA-aaaa-bbbb-cccc",
+        "cvss": [],
+        "fix": {"versions": [], "state": "not-fixed"}
+      },
+      "artifact": {"name": "beispielpaket", "version": "1.0", "type": "python",
+                   "locations": [{"path": "/requirements.txt"}]}
+    }
+  ]
+}

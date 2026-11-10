@@ -1,0 +1,23 @@
+[project]
+name = "sbom-collector"
+version = "0.1.0"
+description = "Sammelt SBOMs vieler Repos und priorisiert ihre CVEs nach KEV, EPSS und CVSS"
+requires-python = ">=3.12"
+license = "MIT"
+dependencies = []
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "UP", "SIM", "C90", "PLR"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pylint]
+max-args = 5
+max-branches = 10
+max-statements = 50
+max-nested-blocks = 3

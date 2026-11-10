@@ -1,0 +1,5 @@
+# Woher der Collector SBOMs holt, eine Angabe je Zeile:
+#   owner          alle nicht archivierten Repos des Kontos oder der Organisation
+#   owner/repo     genau dieses Repo
+# Repos ohne sbom.cdx.json im Standardbranch werden übersprungen.
+hiphopconnect/sbom-testrepo

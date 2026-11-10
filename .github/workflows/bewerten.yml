@@ -1,0 +1,77 @@
+name: SBOMs abholen und bewerten
+
+on:
+  schedule:
+    # Täglich die SBOMs der Quell-Repos abholen und neue oder geänderte bewerten
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+    inputs:
+      alle:
+        description: "Alle SBOMs neu bewerten, nicht nur geänderte"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bewerten
+  cancel-in-progress: false
+
+env:
+  GRYPE_VERSION: "0.121.0"
+  GRYPE_SHA256: "64e07133d3486115de647a66581461dccf5c732748a0a3119077395565f15519"
+
+jobs:
+  bewerten:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: SBOMs abholen
+        env:
+          # Für private Quell-Repos ein Token mit Lesezugriff als Secret hinterlegen
+          SBOM_LESE_TOKEN: ${{ secrets.SBOM_LESE_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 -m collector abholen --liste "$RUNNER_TEMP/geaendert.txt"
+
+      - name: Grype installieren
+        run: |
+          archiv="grype_${GRYPE_VERSION}_linux_amd64.tar.gz"
+          curl -sSfL -o "$RUNNER_TEMP/$archiv" "https://github.com/anchore/grype/releases/download/v${GRYPE_VERSION}/$archiv"
+          echo "${GRYPE_SHA256}  $RUNNER_TEMP/$archiv" | sha256sum -c -
+          mkdir -p "$RUNNER_TEMP/bin"
+          tar -xzf "$RUNNER_TEMP/$archiv" -C "$RUNNER_TEMP/bin" grype
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+
+      - name: Grype-Datenbank laden
+        run: grype db update
+
+      - name: EPSS und KEV laden
+        run: python3 -m collector kataloge
+
+      - name: Bewerten
+        env:
+          ALLE: ${{ inputs.alle }}
+        run: |
+          # Montags alles neu, weil sich EPSS und KEV auch ohne neue SBOM ändern
+          if [ "$ALLE" = "true" ] || [ "$(date -u +%u)" = "1" ]; then
+            python3 -m collector bewerte --alle
+          elif [ -s "$RUNNER_TEMP/geaendert.txt" ]; then
+            mapfile -t geaendert < "$RUNNER_TEMP/geaendert.txt"
+            python3 -m collector bewerte "${geaendert[@]}"
+          else
+            echo "Keine neue oder geänderte SBOM"
+          fi
+
+      # Auch wenn ein Repo nicht bewertet werden konnte (Exit 3), sollen die übrigen Berichte ins Repo;
+      # der Lauf bleibt trotzdem rot. Bei fehlgeschlagener Positivkontrolle (Exit 2) gibt es keine neuen Berichte.
+      - name: SBOMs und Berichte committen
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sboms reports
+          if git diff --cached --quiet; then echo "Nichts zu committen"; exit 0; fi
+          git commit -m "SBOMs und Berichte aktualisieren"
+          git push origin HEAD:main
